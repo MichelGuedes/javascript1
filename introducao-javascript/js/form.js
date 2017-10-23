@@ -5,13 +5,17 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
 //verifica se os dados de um paciente parametro sao validos
 function validaPaciente(paciente){
-  if (validaPeso(paciente.peso)){
-    return true;
-  }
-  else {
-    return false;
+  var msg = [];
+
+  if (!validaPeso(paciente.peso)){
+    msg.push("Peso inválido. ");
   }
 
+  if (!validaAltura(paciente.altura)){
+    msg.push("Altura inválida. ");
+  }
+
+  return msg;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -82,9 +86,15 @@ botaoAdicionar.addEventListener("click", function(event){
   var pacienteTr = adicionaTr(paciente);
 
   //verifica se os dados do paciente estao ok
-  if (!validaPaciente(paciente)){
-    console.log("paciente invalido");
+  var erroMsg = validaPaciente(paciente);
+
+  if (erroMsg.length > 0){
+    var erroHTML = document.querySelector("#mensagem-erro");
+    erroHTML.textContent = erroMsg;
     return;
+  }
+  else {
+    erroHTML.textContent = "";
   }
 
   //associa a nova linha tr com a tabela do form

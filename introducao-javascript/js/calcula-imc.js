@@ -29,7 +29,7 @@ function validaPeso(peso){
 
 //verifica pela regra se a altura e valida
 function validaAltura(altura){
-  if ((alturaPaciente <=0) || (alturaPaciente >= 3.00)){
+  if ((altura <=0) || (altura >= 3.00)){
     return false;
   }
   else{
