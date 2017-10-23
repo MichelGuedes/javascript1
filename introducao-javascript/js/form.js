@@ -3,6 +3,19 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//verifica se os dados de um paciente parametro sao validos
+function validaPaciente(paciente){
+  if (validaPeso(paciente.peso)){
+    return true;
+  }
+  else {
+    return false;
+  }
+
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 //pega os dados de um paciente, a partir de um form parametro
 function retornaPacienteFormulario(form){
   var paciente = {
@@ -67,6 +80,12 @@ botaoAdicionar.addEventListener("click", function(event){
 
   //retorna o Tr montado para popular na tabela HTML
   var pacienteTr = adicionaTr(paciente);
+
+  //verifica se os dados do paciente estao ok
+  if (!validaPaciente(paciente)){
+    console.log("paciente invalido");
+    return;
+  }
 
   //associa a nova linha tr com a tabela do form
   var tabelaPacientes = document.querySelector("#tabela-pacientes");
