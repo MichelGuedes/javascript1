@@ -3,6 +3,33 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
 ////////////////////////////////////////////////////////////////////////////////
 
+//exibe mensagens de erro que estao dentro de um array de strings
+function exibeMensagemErro(arrayMsgErros){
+  var ulMsgErro = document.querySelector("#mensagem-erro");
+  ulMsgErro.innerHTML = "";
+  ulMsgErro.textContent = "";
+
+  //se existe uma msg de erro, passa os valores para as li's de erro dentro da
+  //ul de erro no HTML
+  if (arrayMsgErros.length > 0){
+    arrayMsgErros.forEach(function(msgErro){
+      var liMsgErro = document.createElement("li");
+      liMsgErro.textContent = msgErro;
+      ulMsgErro.appendChild(liMsgErro);
+    });
+
+    return true;
+  }
+
+  //se a mensagem de erro esta vazia, zera o valor da mensagem de erro, tambem
+  //para limpar o que quer que ja estivesse la
+  else{
+    return false;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 //verifica se os dados de um paciente parametro sao validos
 function validaPaciente(paciente){
   var msg = [];
@@ -88,13 +115,10 @@ botaoAdicionar.addEventListener("click", function(event){
   //verifica se os dados do paciente estao ok
   var erroMsg = validaPaciente(paciente);
 
-  if (erroMsg.length > 0){
-    var erroHTML = document.querySelector("#mensagem-erro");
-    erroHTML.textContent = erroMsg;
+  //se tem mensagem de erro, pula fora da execucao para nao adicionar o paciente.
+  //voltamos ao VBScript com GOTO disfarcado, viva!
+  if (exibeMensagemErro(erroMsg)){
     return;
-  }
-  else {
-    erroHTML.textContent = "";
   }
 
   //associa a nova linha tr com a tabela do form
