@@ -34,12 +34,20 @@ function exibeMensagemErro(arrayMsgErros){
 function validaPaciente(paciente){
   var msg = [];
 
-  if (!validaPeso(paciente.peso)){
-    msg.push("Peso inválido. ");
+  if (paciente.nome.length == 0){
+    msg.push("Nome do paciente não pode ser vazio.");
   }
 
-  if (!validaAltura(paciente.altura)){
-    msg.push("Altura inválida. ");
+  if ((!validaPeso(paciente.peso)) || (paciente.peso.length==0)){
+    msg.push("Peso inválido.");
+  }
+
+  if ((!validaAltura(paciente.altura)) || (paciente.altura.lenght<=0)){
+    msg.push("Altura inválida.");
+  }
+
+  if (paciente.gordura.length == 0){
+    msg.push("Percentual de gordura é inválido.")
   }
 
   return msg;
