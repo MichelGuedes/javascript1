@@ -20,5 +20,11 @@ tabela.addEventListener("dblclick", function(event){
   //parent node vai pegar o elemento acima deste. o target mesmo so traz a celula
   //e nao a linha inteira
   //console.log(event.target.parentNode);
-  event.target.parentNode.remove();
+
+  //adiciona efeito de esmaecimento a remocao do paciente. ver index.css
+  event.target.parentNode.classList.add("fadeOut");
+
+  setTimeout(function(){
+    event.target.parentNode.remove();
+  }, 500); //-> aguarda 500 milisegundos para o efeito de fadeOut acabar e entao remover o paciente
 });
