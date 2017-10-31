@@ -14,6 +14,8 @@ var tabela = document.querySelector("#tabela-pacientes");
 
 //o parametro "event" passado para a function guarda qual celula indice foi clicada
 //na tabela, dessa maneira esse elemento pode ser removido.
+//e nesse caso, como vc esta passando para outro objeto da tabela (no caso o parent)
+//a responsabilidade de remocao e nao do objeto em si, vc esta fazendo uso de DELEGATE
 tabela.addEventListener("dblclick", function(event){
   //parent node vai pegar o elemento acima deste. o target mesmo so traz a celula
   //e nao a linha inteira
