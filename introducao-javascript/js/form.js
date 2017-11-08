@@ -104,6 +104,25 @@ function adicionaTr(paciente){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+function adicionaPaciente(p){
+  //retorna o Tr montado para popular na tabela HTML
+  var pacienteTr = adicionaTr(p);
+
+  //verifica se os dados do paciente estao ok
+  var erroMsg = validaPaciente(p);
+
+  //se tem mensagem de erro, pula fora da execucao para nao adicionar o paciente.
+  //voltamos ao VBScript com GOTO disfarcado, viva!
+  if (exibeMensagemErro(erroMsg)){
+    return;
+  }
+
+  //associa a nova linha tr com a tabela do form
+  var tabelaPacientes = document.querySelector("#tabela-pacientes");
+  tabelaPacientes.appendChild(pacienteTr);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 //adiciona um listener de click no botao de adicionar do form
 botaoAdicionar.addEventListener("click", function(event){
@@ -116,22 +135,7 @@ botaoAdicionar.addEventListener("click", function(event){
   //extrai os dados do paciente que esta no formulario e popula a variavel obj
   //paciente abaixo
   var paciente = retornaPacienteFormulario(form);
-
-  //retorna o Tr montado para popular na tabela HTML
-  var pacienteTr = adicionaTr(paciente);
-
-  //verifica se os dados do paciente estao ok
-  var erroMsg = validaPaciente(paciente);
-
-  //se tem mensagem de erro, pula fora da execucao para nao adicionar o paciente.
-  //voltamos ao VBScript com GOTO disfarcado, viva!
-  if (exibeMensagemErro(erroMsg)){
-    return;
-  }
-
-  //associa a nova linha tr com a tabela do form
-  var tabelaPacientes = document.querySelector("#tabela-pacientes");
-  tabelaPacientes.appendChild(pacienteTr);
+  adicionaPaciente(paciente);
 
   //limpa os campos do formulario
   form.reset();
